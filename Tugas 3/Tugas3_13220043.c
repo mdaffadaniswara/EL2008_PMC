@@ -6,19 +6,18 @@
 
 int main () {
     FILE *fp;
-    unsigned char head_pdf[5];
-    unsigned char head_jpg[3];
-    unsigned char signature_pdf[5] = {0x25, 0x50, 0x44, 0x46, 0x2D};
-    unsigned char signature_jpg[3] = {0xFF, 0xD8, 0xFF};
+    unsigned char head[5];
+    unsigned char signature_pdf[5] = {0x25, 0x50, 0x44, 0x46, 0x2D}; // file signature pdf
+    unsigned char signature_jpg[3] = {0xFF, 0xD8, 0xFF}; // file signature jpg
     int ret_pdf;
     int ret_jpg;
 
-    fp = fopen("testpng.png","rb");
-    fread(head_pdf, sizeof(head_pdf), 1, fp);
+    fp = fopen("testpng.png","rb");  //file yang ingin dicek
+    fread(head, sizeof(head), 1, fp);
 
 
-    ret_pdf = memcmp(signature_pdf, head_pdf, 5);
-    ret_jpg = memcmp(signature_jpg, head_pdf, 3);
+    ret_pdf = memcmp(signature_pdf, head, 5); //mencocokan file signature antara file yang ingin dicek dengan file signature pdf
+    ret_jpg = memcmp(signature_jpg, head, 3); //mencocokan file signature antara file yang ingin dicek dengan file signature jpg
 
 
     if (ret_pdf==0)
